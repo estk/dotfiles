@@ -11,6 +11,22 @@
     diff = auto
     status = auto
 
+[color "branch"]
+    current = red reverse
+    local = blue
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+    
 [alias]
     st = status -s
 
@@ -32,24 +48,21 @@
     #"!git branch -ra | grep -v done"
     bra = branch -ra
     #list commands
-    le = log --oneline --decorate
     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-    ls1 = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-    lds = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
+    lg = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
     ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-    lc  = "!f() { git ll "$1"^.."$1"; }; f"
-    lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
     #list all aliases
     la = "!git config -l | grep alias | cut -c 7-"
     diff = diff --word-diff
     d = diff --word-diff
+    dt = difftool --word-diff
     dc = diff --cached
+    dtc = difftool --cached
     #list modified files in last commit
     dl = "!git ll -1"
     #diff last commit
     dlc = diff --cached HEAD^
-    dr  = "!f() { git diff -w "$1"^.."$1"; }; f"
-    diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+    dtlc = difftool --cached HEAD^
     branch = branch -ra
 
     #reset commands
@@ -107,3 +120,16 @@
     #subtree add
     sba = "!f() { git subtree add --prefix $2 $1 master --squash; }; f" 
 # }}}
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[diff]
+	tool = Kaleidoscope
+[difftool]
+	prompt = false
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[mergetool]
+	prompt = false
+[merge]
+	tool = Kaleidoscope
