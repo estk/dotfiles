@@ -22,4 +22,7 @@ antigen apply
 
 bindkey -e
 
-export PATH=/usr/local/share/npm/bin:$PATH
+unsetopt nomatch
+
+export PATH=/usr/local/share/npm/bin:/usr/local/bin:$PATH
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

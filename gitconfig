@@ -66,6 +66,10 @@
     dtlc = difftool --cached HEAD^
     branch = branch -ra
 
+    #push
+    po = push origin
+    ph = push heroku
+
     #reset commands
     r = reset
     r1 = reset HEAD^
@@ -80,6 +84,7 @@
     svnl = svn log --oneline --show-commit
 
     #stash
+    s = stash
     sl = stash list
     sa = stash apply
     ss = stash save
@@ -120,7 +125,10 @@
 
     #subtree add
     sba = "!f() { git subtree add --prefix $2 $1 master --squash; }; f" 
-# }}}
+
+[push]
+	default = simple
+
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [diff]
@@ -134,3 +142,4 @@
 	prompt = false
 [merge]
 	tool = Kaleidoscope
+
