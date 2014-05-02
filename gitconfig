@@ -5,6 +5,7 @@
 	helper = osxkeychain
 [core]
     editor = /usr/bin/vim
+	excludesfile = /Users/estk/.gitignore_global
     
 [color]
     branch = auto
@@ -143,3 +144,13 @@
 [merge]
 	tool = Kaleidoscope
 
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[github]
+	user = estk
+[ghi]
+	token = c185363655051d9cffbab24788d199e799b6b03f
