@@ -1,89 +1,95 @@
-" ==== Vundle ====
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
 
 " Vim
-Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'tpope/vim-surround'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'tpope/vim-surround'
 
 " Airline
-Bundle 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 
-  Bundle "edkolev/promptline.vim"
-  Bundle "edkolev/tmuxline.vim"
+  Plugin 'edkolev/promptline.vim'
+  Plugin 'edkolev/tmuxline.vim'
 
 " Code
-Bundle 'rking/ag.vim'
+Plugin 'rking/ag.vim'
 
 " Git
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-git'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-git'
 
 " Util
 
-Bundle "tpope/vim-unimpaired"
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'wincent/Command-T'
-Bundle 'mbbill/undotree'
-Bundle 'fholgado/minibufexpl.vim'
-Bundle "wannesm/rmvim.vim"
-Bundle 'Townk/vim-autoclose'
-Bundle 'LargeFile'
-Bundle 'BufOnly.vim'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'wincent/Command-T'
+Plugin 'mbbill/undotree'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'wannesm/rmvim.vim'
+Plugin 'Townk/vim-autoclose'
+Plugin 'LargeFile'
+Plugin 'BufOnly.vim'
 
 
 " Themes
-Bundle 'altercation/vim-colors-solarized.git'
-Bundle 'telamon/vim-color-github'
-Bundle 'molokai'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'xoria256.vim'
-Bundle 'Pychimp/vim-luna'
+Plugin 'altercation/vim-colors-solarized.git'
+Plugin 'telamon/vim-color-github'
+Plugin 'molokai'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'xoria256.vim'
+Plugin 'Pychimp/vim-luna'
 
 
 " Syntax
-Bundle 'scrooloose/syntastic'
-Bundle 'marijnh/tern_for_vim'
-Bundle 'kien/rainbow_parentheses.vim'
-" Bundle 'Raimondi/delimitMate'
-Bundle 'jiangmiao/auto-pairs.git'
-" Bundle 'honza/vim-snippets'
-Bundle 'godlygeek/tabular'
+Plugin 'scrooloose/syntastic'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'kien/rainbow_parentheses.vim'
+" Plugin 'Raimondi/delimitMate'
+Plugin 'jiangmiao/auto-pairs.git'
+" Plugin 'honza/vim-snippets'
+Plugin 'godlygeek/tabular'
 
   " Latex
-  Bundle 'LaTeX-Box-Team/LaTeX-Box'
+  Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
   " Pandoc
-  Bundle 'vim-pandoc/vim-pandoc'
+  Plugin 'vim-pandoc/vim-pandoc'
 
   " Webdev
-  Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-  Bundle 'groenewege/vim-less'
-  Bundle 'vim-stylus'
+  Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+  Plugin 'groenewege/vim-less'
+  Plugin 'vim-stylus'
 
     " JS
-    Bundle 'jelera/vim-javascript-syntax'
-    Bundle 'pangloss/vim-javascript'
-    Bundle 'kchmck/vim-coffee-script'
-    Bundle 'mmalecki/vim-node.js'
-    Bundle 'nono/vim-handlebars'
-    Bundle 'moll/vim-node'
+    Plugin 'jelera/vim-javascript-syntax'
+    Plugin 'pangloss/vim-javascript'
+    Plugin 'kchmck/vim-coffee-script'
+    Plugin 'mmalecki/vim-node.js'
+    Plugin 'nono/vim-handlebars'
+    Plugin 'moll/vim-node'
 
   " Haskell
-  Bundle 'wlangstroth/vim-haskell'
+  Plugin 'wlangstroth/vim-haskell'
 
   " Arduino
-  Bundle 'Arduino-syntax-file'
+  Plugin 'Arduino-syntax-file'
 
   " Scala
-  Bundle 'rosstimson/scala-vim-support'
+  Plugin 'rosstimson/scala-vim-support'
 
+call vundle#end()
 
 " ==== General ====
 
