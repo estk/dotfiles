@@ -9,7 +9,6 @@ Bundle 'gmarik/vundle'
 " Vim
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
-" Bundle 'duff/vim-scratch'
 Bundle 'tpope/vim-surround'
 
 " Airline
@@ -70,7 +69,7 @@ Bundle 'godlygeek/tabular'
 
     " JS
     Bundle 'jelera/vim-javascript-syntax'
-    " Bundle 'pangloss/vim-javascript'
+    Bundle 'pangloss/vim-javascript'
     Bundle 'kchmck/vim-coffee-script'
     Bundle 'mmalecki/vim-node.js'
     Bundle 'nono/vim-handlebars'
@@ -84,9 +83,6 @@ Bundle 'godlygeek/tabular'
 
   " Scala
   Bundle 'rosstimson/scala-vim-support'
-
-  " Rust
-  Bundle 'wting/rust.vim'
 
 
 " ==== General ====
@@ -236,6 +232,7 @@ nnoremap gp `[v`]
 autocmd BufRead,BufNewFile  *.lessimport set filetype=less
 autocmd BufRead,BufNewFile  *.md set filetype=pandoc.html
 autocmd BufRead,BufNewFile  *.js set filetype=javascript
+autocmd BufWritePost more.md !pandoc --mathml -t html -Ss -o "more".html --css "more.css" "more.md" 
 
 
 " Digraphs
@@ -248,21 +245,5 @@ digraph dl 8998 "⌦
 
 
 " ESFormatter
-nnoremap <silent> <leader>e :call JSFormat()<cr>
- 
-function! JSFormat()
-" Preparation: save last search, and cursor position.
-let l:win_view = winsaveview()
-let l:last_search = getreg('/')
- 
-" call esformatter with the contents form and cleanup the extra newline
-execute ":%!~/.vim/bin/js-format.sh"
-if v:shell_error
-echoerr 'format script failed'
-undo
-return 0
-endif
-" Clean up: restore previous search history, and cursor position
-call winrestview(l:win_view)
-call setreg('/', l:last_search)
-endfunction
+vnoremap <silent> <leader>es :! esformatter<CR>
+nnoremap <silent> <leader>es :%!esformatter<CR>
