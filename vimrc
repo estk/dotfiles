@@ -1,95 +1,112 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+let s:darwin = has('mac')
+let s:ag     = executable('ag')
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+" ============================================================================
+" VIM-PLUG BLOCK
+" ============================================================================
 
+silent! if plug#begin('~/.vim/plugged')
 
 " Vim
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'tpope/vim-surround'
+Plug 'junegunn/vim-easy-align',       { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
+Plug 'junegunn/fzf',           { 'do': 'yes \| ./install' }
+Plug 'tpope/vim-sensible'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'tpope/vim-surround'
+
+if v:version >= 703
+  Plug 'junegunn/vim-after-object'
+endif
+if s:darwin
+Plug 'junegunn/vim-xmark', { 'do': 'make' }
+endif
 
 " Airline
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 
-  Plugin 'edkolev/promptline.vim'
-  Plugin 'edkolev/tmuxline.vim'
+  Plug 'edkolev/promptline.vim'
+  Plug 'edkolev/tmuxline.vim'
 
 " Code
-Plugin 'rking/ag.vim'
+Plug 'rking/ag.vim'
 
 " Git
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-git'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'gregsexton/gitv', { 'on': 'Gitv' }
+Plug 'mattn/gist-vim'
+
+" Tmux
+Plug 'tpope/vim-tbone'
+Plug 'tpope/vim-dispatch'
 
 " Util
 
-Plugin 'tpope/vim-unimpaired'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'wincent/Command-T'
-Plugin 'mbbill/undotree'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'wannesm/rmvim.vim'
-Plugin 'Townk/vim-autoclose'
-Plugin 'LargeFile'
-Plugin 'BufOnly.vim'
+Plug 'tpope/vim-unimpaired'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'tomtom/tcomment_vim'
+Plug 'wincent/Command-T'
+Plug 'tpope/vim-commentary',        { 'on': '<Plug>Commentary' }
+Plug 'mbbill/undotree',             { 'on': 'UndotreeToggle'   }
+Plug 'fholgado/minibufexpl.vim'
+Plug 'wannesm/rmvim.vim'
+Plug 'Townk/vim-autoclose'
+Plug 'LargeFile'
+Plug 'BufOnly.vim'
 
 
 " Themes
-Plugin 'altercation/vim-colors-solarized.git'
-Plugin 'telamon/vim-color-github'
-Plugin 'molokai'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'xoria256.vim'
-Plugin 'Pychimp/vim-luna'
+Plug 'altercation/vim-colors-solarized'
+Plug 'telamon/vim-color-github'
+Plug 'nathanaelkane/vim-indent-guides'
 
 
 " Syntax
-Plugin 'scrooloose/syntastic'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'kien/rainbow_parentheses.vim'
-" Plugin 'Raimondi/delimitMate'
-Plugin 'jiangmiao/auto-pairs.git'
-" Plugin 'honza/vim-snippets'
-Plugin 'godlygeek/tabular'
+Plug 'scrooloose/syntastic'
+Plug 'marijnh/tern_for_vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'godlygeek/tabular'
+Plug 'junegunn/rainbow_parentheses.vim'
 
   " Latex
-  Plugin 'LaTeX-Box-Team/LaTeX-Box'
+  Plug 'LaTeX-Box-Team/LaTeX-Box'
 
   " Pandoc
-  Plugin 'vim-pandoc/vim-pandoc'
+  Plug 'vim-pandoc/vim-pandoc'
 
   " Webdev
-  Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-  Plugin 'groenewege/vim-less'
-  Plugin 'vim-stylus'
+  Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+  Plug 'groenewege/vim-less'
+  Plug 'vim-stylus'
 
     " JS
-    Plugin 'jelera/vim-javascript-syntax'
-    Plugin 'pangloss/vim-javascript'
-    Plugin 'kchmck/vim-coffee-script'
-    Plugin 'mmalecki/vim-node.js'
-    Plugin 'nono/vim-handlebars'
-    Plugin 'moll/vim-node'
+    Plug 'jelera/vim-javascript-syntax'
+    Plug 'pangloss/vim-javascript'
+    Plug 'kchmck/vim-coffee-script'
+    Plug 'mmalecki/vim-node.js'
+    Plug 'nono/vim-handlebars'
+    Plug 'moll/vim-node'
 
   " Haskell
-  Plugin 'wlangstroth/vim-haskell'
+  Plug 'wlangstroth/vim-haskell'
 
   " Arduino
-  Plugin 'Arduino-syntax-file'
+  Plug 'Arduino-syntax-file'
 
   " Scala
-  Plugin 'rosstimson/scala-vim-support'
+  Plug 'rosstimson/scala-vim-support'
+  
+if s:darwin
+  Plug 'Keithbsmiley/investigate.vim'
+  Plug 'rizzatti/dash.vim'
+endif
 
-call vundle#end()
+call plug#end()
+endif
 
 " ==== General ====
 
@@ -117,7 +134,7 @@ set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h13
 
 let mapleader = ","
 
-" Plugin Config
+" Plug Config
 
   " Nerdtree
   let NERDTreeHijackNetrw=1
@@ -177,11 +194,6 @@ let mapleader = ","
   " Rainbow
   nmap <leader>R :RainbowParenthesesToggle<cr>
 
-  au Syntax * RainbowParenthesesLoadRound
-  au Syntax * RainbowParenthesesLoadSquare
-  au Syntax * RainbowParenthesesLoadBraces
-
-
 " Editing Config
 set autoindent
 set smartindent
@@ -236,9 +248,9 @@ nnoremap gp `[v`]
 
 " Syntax
 autocmd BufRead,BufNewFile  *.lessimport set filetype=less
-autocmd BufRead,BufNewFile  *.md set filetype=pandoc.html
+" autocmd BufRead,BufNewFile  *.md set filetype=pandoc.html
 autocmd BufRead,BufNewFile  *.js set filetype=javascript
-autocmd BufWritePost more.md !pandoc --mathml -t html -Ss -o "more".html --css "more.css" "more.md" 
+" autocmd BufWritePost more.md !pandoc --mathml -t html -Ss -o "more".html --css "more.css" "more.md" 
 
 
 " Digraphs

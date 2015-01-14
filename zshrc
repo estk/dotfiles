@@ -1,66 +1,45 @@
-source ~/dotfiles/antigen/antigen.zsh
-
-antigen use oh-my-zsh
-
-antigen bundle git
-antigen bundle github
-antigen bundle git-flow
-antigen bundle cabal
-antigen bundle brew
-antigen bundle osx
-antigen bundle heroku
-antigen bundle node
-antigen bundle npm
-antigen bundle rsync
-antigen bundle command-not-found
-
-antigen bundle colored-man
-antigen bundle dircycle
-antigen bundle golang
-antigen bundle vundle
-
-antigen bundle zsh-users/zsh-syntax-highlighting
-# antigen bundle tarruda/zsh-autosuggestions
-
-
-
-antigen theme sunrise
-
-antigen apply
-
-bindkey -e
-
-unsetopt nomatch
-
-# promptline vim
-# [ -f ~/.shell_prompt.sh ] && source ~/.shell_prompt.sh
-
-export PATH=/usr/local/share/npm/bin:/usr/local/bin:$HOME/.cabal/bin:$PATH
-# PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-alias tsync="rsync -W -P -r evan@10.0.0.16:/media/tb/transmission/What_nAAC ~/Music/iTunes/iTunes\ Media/What_nAAC"
-
-encfile() {
-  openssl des3 -salt -in $1 -out $2
-}
-alias encfile=encfile
-decfile() {
-  openssl des3 -d -salt -in $1 -out $2
-}
-alias decfile=decfile
-
-autoload zmv
-
-# # Enable autosuggestions automatically
-# zle-line-init() {
-#     zle autosuggest-start
-# }
-# zle -N zle-line-init
 #
-# # use ctrl+t to toggle autosuggestions(hopefully this wont be needed as
-# # zsh-autosuggestions is designed to be unobtrusive)
-# bindkey '^T' autosuggest-toggle
-# # Accept suggestions without leaving insert mode
-# bindkey '^f' vi-forward-word
-# # or
-# bindkey '^f' vi-forward-blank-word
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+alias vim='mvim -v'
+export EDITOR=vim
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Misc
+
+# Open the file in a given macvim server.
+vis() {
+  mvim --servername ${2:=VIM} --remote $1
+}
+alias tmush='ssh rsyncadmin@192.168.56.10 -t "tmux -CC"'
+alias notify='terminal-notifier -sound default -message'
+# alias vim="mvim -v"
+
+bindkey -v
+export KEYTIMEOUT=1
+
+# codebase
+alias makeemailswork='sh cli/debug/make_emails_work.sh'
+alias unmemcache='nc localhost 11100 <<< "flush_all" && nc localhost 11101 <<< "flush_all"'
+
+# Additional
+
+# Make git autocomlete un-useless.
+__git_files () {
+    _wanted files expl 'local files' _files
+}
+source ~/.fzf.zsh
+
+# User specific aliases and functions
+alias taillog='tail -f /var/www/git-repos/pm/logs/application/webapp.log'
+alias cd=pushd
+# alias tmux="TERM=screen-256color-bce tmux"
+
+PATH=$PATH:/usr/local/bin
