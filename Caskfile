@@ -10,18 +10,28 @@ install brew-cask
 
 # Install Casks
 
+cask install adobe-creative-cloud
 cask install amethyst
-cask install crashplan
+cask install atom
+cask install charles
+cask install dash
 cask install dashlane
 cask install dropbox
 cask install firefox
 cask install google-chrome
+cask install haskell-platform
+cask install iterm2
 cask install kaleidoscope
 cask install karabiner
 cask install keepassx
 cask install macvim
+cask install rowanj-gitx
+cask install secrets
 cask install seil
+cask install sequel-pro
+cask install slack
 cask install slate
 cask install spotify
 cask install textwrangler
+cask install vimr
 cask install virtualbox

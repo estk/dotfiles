@@ -1,11 +1,11 @@
 [user]
-	name = Evan Simmons
-	email = esims89@gmail.com
+    name = Evan Simmons
+    email = esims89@gmail.com
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
 [core]
-    editor = /usr/bin/vim
-	excludesfile = /Users/estk/.gitignore_global
+    editor = /usr/local/bin/nvim
+    excludesfile = /Users/estk/.gitignore_global
     
 [color]
     branch = auto

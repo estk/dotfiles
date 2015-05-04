@@ -8,22 +8,36 @@ let s:ag     = executable('ag')
 " VIM-PLUG BLOCK
 " ============================================================================
 
-silent! if plug#begin('~/.vim/plugged')
+silent! if plug#begin('~/.nvim/plugged')
 
 " Vim
 Plug 'junegunn/vim-easy-align',       { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-Plug 'junegunn/fzf',           { 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'tpope/vim-sensible'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-after-object'
 
-if v:version >= 703
-  Plug 'junegunn/vim-after-object'
-endif
+" global stuffs
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+set clipboard=unnamed
+
 if s:darwin
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
 endif
+
+if has('mouse_sgr')
+    set ttymouse=sgr
+endif
+set mouse=a
+
+" Neovim
+Plug 'benekastah/neomake'
+Plug 'bruno-/vim-man'
+
+
+autocmd! BufWritePost * Neomake
 
 " Airline
 Plug 'bling/vim-airline'
@@ -33,10 +47,14 @@ Plug 'bling/vim-airline'
 
 " Code
 Plug 'rking/ag.vim'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'joonty/vdebug'
 
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
+Plug 'airblade/vim-gitgutter'
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 Plug 'mattn/gist-vim'
 
@@ -66,7 +84,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 
 " Syntax
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'marijnh/tern_for_vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'godlygeek/tabular'
@@ -109,8 +127,6 @@ call plug#end()
 endif
 
 " ==== General ====
-
-set nocompatible               " be iMproved
 set binary
 filetype plugin indent on
 syntax enable
@@ -122,10 +138,10 @@ nmap <leader>ln :lnext<cr>
 nmap <leader>lp :lprev<cr>
 
 " Looks
-set background=dark
+set background=light
 colorscheme solarized
 if has("gui_running")
-    set transparency=5
+    " set transparency=5
 endif
 
 set t_Co=256
@@ -138,17 +154,16 @@ let mapleader = ","
 
   " Nerdtree
   let NERDTreeHijackNetrw=1
-  let g:nerdtree_tabs_open_on_gui_startup=0
 
-  nmap <D-E> :NERDTreeTabsToggle<cr>
-  imap <D-E> <esc>:NERDTreeTabsToggle<cr>
-  nmap <leader>E :NERDTreeTabsToggle<cr>
+  nmap <D-E> :NERDTreeToggle<cr>
+  imap <D-E> <esc>:NERDTreeToggle<cr>
+  nmap <leader>E :NERDTreeToggle<cr>
 
 
   " Airline
   let g:airline_powerline_fonts = 1
-  let g:airline_enable_branch     = 1
-  let g:airline_enable_syntastic  = 1
+  let g:airline#extensions#branch#enabled = 1
+  let g:airline#extensions#syntastic#enabled = 1
 
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#tab_min_count = 2
@@ -157,20 +172,26 @@ let mapleader = ","
   let g:airline#extensions#tabline#show_buffers = 0
   let g:airline#extensions#tabline#buffer_nr_show = 1
   let g:airline#extensions#tabline#fnamecollapse = 1
-  
-  
 
   set laststatus=2
+
+  " Code
+  let g:vdebug_options = {}
+  let g:vdebug_options["port"] = 9000
+  let g:vdebug_options['path_maps'] = {"/var/www/git-repos/cs": "/Users/evan.simmons/repos/cs"}
+  let g:vdebug_options['server'] = ""
+
+  let g:ag_format="%f:%l:%m"
 
   " JS
   let g:javascript_conceal = 1
 
   " Comment
   nmap <leader>/ :TComment<cr>
-  vmap <leader>/ :TComment<cr>
   nmap <D-/> :TComment<cr>
   imap <D-/> <esc>:TComment<cr>
   vmap <D-/> :TComment<cr> gv
+  vmap <leader>/ :TComment<cr>
 
   "Latex
   let g:LatexBox_viewer="open -a skim"
@@ -188,7 +209,7 @@ let mapleader = ","
   " Gundo
   nmap <leader>gu :GundoToggle<cr>
   set undofile                " Save undo's after file closes
-  set undodir=$HOME/.vim/undo " where to save undo histories
+  set undodir=$HOME/.nvim/undo " where to save undo histories
   set undolevels=1000         " How many undos
   set undoreload=10000        " number of lines to save for undo
 
@@ -220,7 +241,7 @@ nnoremap gp `[v`]
 
   nmap <D-F> :Ag 
   nmap <leader>f :Ag 
-  nmap <leader>t :AgFile 
+  nmap <leader>t :FZF<cr>
 
   " View
   set list
