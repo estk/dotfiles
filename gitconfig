@@ -1,12 +1,12 @@
 [user]
     name = Evan Simmons
-    email = esims89@gmail.com
+    email = evan.simmons@creditkarma.com
 [credential]
     helper = osxkeychain
 [core]
-    editor = /usr/local/bin/nvim
-    excludesfile = /Users/estk/.gitignore_global
-    
+    editor = nvim
+    excludesfile = ~/.gitignore_global
+
 [color]
     branch = auto
     diff = auto
@@ -30,15 +30,14 @@
     
 [alias]
     st = status -s
-
     cl = clone
-
     ci = commit
     cm = commit -m
     cma = commit -a -m
     ca = commit --amend
     amend = commit --amend
     caa = commit -a --amend -C HEAD
+
     filelog = log -u
     fl = log -u
 
@@ -52,6 +51,7 @@
     ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
     lg = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
     ll = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+
     #list all aliases
     la = "!git config -l | grep alias | cut -c 7-"
     diff = diff --word-diff
@@ -60,8 +60,10 @@
     dt = difftool --word-diff
     dc = diff --cached
     dtc = difftool --cached
+
     #list modified files in last commit
     dl = "!git ll -1"
+
     #diff last commit
     dlc = diff --cached HEAD^
     dtlc = difftool --cached HEAD^
@@ -128,29 +130,24 @@
     sba = "!f() { git subtree add --prefix $2 $1 master --squash; }; f" 
 
 [push]
-	default = simple
+    default = simple
 
 [difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+    cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [diff]
-	tool = Kaleidoscope
+    tool = Kaleidoscope
 [difftool]
-	prompt = false
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
-[mergetool]
-	prompt = false
-[merge]
-	tool = Kaleidoscope
+    prompt = false
 
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
+[mergetool "Kaleidoscope"]
+    cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+    trustExitCode = true
+[mergetool]
+    prompt = false
+[merge]
+    tool = Kaleidoscope
+
 [github]
-	user = estk
+    user = estk
 [ghi]
-	token = c185363655051d9cffbab24788d199e799b6b03f
+    token = c185363655051d9cffbab24788d199e799b6b03f
