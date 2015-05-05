@@ -1,1 +1,3 @@
-oh-my-zsh
+# Nothing in vim folder except autoload
+vim/*
+!vim/autoload
