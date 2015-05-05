@@ -5,6 +5,20 @@ let s:darwin = has('mac')
 let s:ag     = executable('ag')
 
 " ============================================================================
+" NEOVIM
+" ============================================================================
+" global stuffs
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+set clipboard=unnamed
+
+if has('mouse_sgr')
+    set ttymouse=sgr
+endif
+set mouse=a
+
+autocmd! BufWritePost * Neomake
+
+" ============================================================================
 " VIM-PLUG BLOCK
 " ============================================================================
 
@@ -19,25 +33,14 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-after-object'
 
-" global stuffs
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-set clipboard=unnamed
-
 if s:darwin
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
 endif
-
-if has('mouse_sgr')
-    set ttymouse=sgr
-endif
-set mouse=a
 
 " Neovim
 Plug 'benekastah/neomake'
 Plug 'bruno-/vim-man'
 
-
-autocmd! BufWritePost * Neomake
 
 " Airline
 Plug 'bling/vim-airline'
@@ -140,13 +143,9 @@ nmap <leader>lp :lprev<cr>
 " Looks
 set background=light
 colorscheme solarized
-if has("gui_running")
-    " set transparency=5
-endif
 
 set t_Co=256
 set anti
-set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h13
 
 let mapleader = ","
 
@@ -249,7 +248,6 @@ nnoremap gp `[v`]
   set concealcursor="nc"
   set number
   set hidden
-  set ambiwidth=double
   set listchars=tab:▸\ ,eol:¬
 
   nmap <leader>l :set list!<CR> " Shortcut to rapidly toggle `set list`
