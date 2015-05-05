@@ -249,7 +249,6 @@ nnoremap gp `[v`]
   set concealcursor="nc"
   set number
   set hidden
-  set ambiwidth=double
   set listchars=tab:▸\ ,eol:¬
 
   nmap <leader>l :set list!<CR> " Shortcut to rapidly toggle `set list`
