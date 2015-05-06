@@ -58,10 +58,35 @@ cd $dir
 echo "done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
+echo "Moving any existing dotfiles from ~ to $olddir"
 for file in $files; do
-    echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file ~/dotfiles_old/
+    if [ ! -h ~/.$file ]; then
+        echo "Moving existing dotfile .$file from ~ to $olddir"
+        mv ~/.$file ~/dotfiles_old/$file
+    else
+        # remove symlink
+        rm ~/.$file
+    fi
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
 
+##############
+# Neovim links
+##############
+
+makelink () {
+    file=$1
+    link=$2
+    # is not symlink?
+    if [ ! -h ~/.$link ]; then
+        mv ~/.$link ~/dotfiles_old/$link
+    else
+        # remove symlink
+        rm ~/.$link
+    fi
+    ln -s $dir/"$file" ~/."$link"
+    return 0
+}
+makelink "vim" "nvim"
+makelink "vimrc" "nvimrc"
