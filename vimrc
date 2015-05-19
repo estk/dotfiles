@@ -1,7 +1,8 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
+" ==========
+" ENV INFO
+" ==========
 let s:darwin = has('mac')
+let s:nvim   = has('nvim')
 let s:ag     = executable('ag')
 
 " ============================================================================
@@ -19,25 +20,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-after-object'
 
-" global stuffs
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-set clipboard=unnamed
-
-if s:darwin
-Plug 'junegunn/vim-xmark', { 'do': 'make' }
-endif
-
-if has('mouse_sgr')
-    set ttymouse=sgr
-endif
-set mouse=a
-
 " Neovim
 Plug 'benekastah/neomake'
 Plug 'bruno-/vim-man'
-
-
-autocmd! BufWritePost * Neomake
 
 " Airline
 Plug 'bling/vim-airline'
@@ -121,15 +106,19 @@ Plug 'junegunn/rainbow_parentheses.vim'
 if s:darwin
   Plug 'Keithbsmiley/investigate.vim'
   Plug 'rizzatti/dash.vim'
+  Plug 'junegunn/vim-xmark', { 'do': 'make' }
 endif
 
 call plug#end()
 endif
 
-" ==== General ====
-set binary
-filetype plugin indent on
-syntax enable
+" ============================================================================
+" GLOBAL CONFIG BLOCK
+" ============================================================================
+
+let mapleader = ","
+set clipboard=unnamed
+
 nmap <leader>d :b#<bar>bd#<CR>
 nmap <leader>cn :cnext<cr>
 nmap <leader>cp :cprev<cr>
@@ -140,87 +129,117 @@ nmap <leader>lp :lprev<cr>
 " Looks
 set background=light
 colorscheme solarized
-if has("gui_running")
-    " set transparency=5
+
+" =====================
+" NEOVIM BLOCK
+" =====================
+if !s:nvim
+  set nocompatible
 endif
+" =====================
+" CURSOR BLOCK
+" =====================
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+if has('mouse_sgr')
+    set ttymouse=sgr
+endif
+set mouse=a
 
-set t_Co=256
-set anti
-set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h13
+" =====================
+" AUTOCMD BLOCK
+" =====================
+autocmd! BufWritePost * Neomake
+autocmd BufRead,BufNewFile  *.lessimport set filetype=less
+autocmd BufRead,BufNewFile  *.js set filetype=javascript
+" autocmd BufRead,BufNewFile  *.md set filetype=pandoc.html
+" autocmd BufWritePost more.md !pandoc --mathml -t html -Ss -o "more".html --css "more.css" "more.md" 
+"
+" ============================================================================
+" PLUGIN CONFIG BLOCK
+" ============================================================================
+"
+" =====================
+" NERDTREE BLOCK
+" =====================
+let NERDTreeHijackNetrw=1
 
-let mapleader = ","
+nmap <D-E> :NERDTreeToggle<cr>
+imap <D-E> <esc>:NERDTreeToggle<cr>
+nmap <leader>E :NERDTreeToggle<cr>
 
-" Plug Config
+" =====================
+" AIRLINE BLOCK
+" =====================
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
 
-  " Nerdtree
-  let NERDTreeHijackNetrw=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#tabline#excludes = ['-MiniBufExplorer-']
 
-  nmap <D-E> :NERDTreeToggle<cr>
-  imap <D-E> <esc>:NERDTreeToggle<cr>
-  nmap <leader>E :NERDTreeToggle<cr>
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#fnamecollapse = 1
 
+set laststatus=2
 
-  " Airline
-  let g:airline_powerline_fonts = 1
-  let g:airline#extensions#branch#enabled = 1
-  let g:airline#extensions#syntastic#enabled = 1
+" =====================
+" VDEBUG BLOCK
+" =====================
+let g:vdebug_options = {}
+let g:vdebug_options["port"] = 9000
+let g:vdebug_options['path_maps'] = {"/var/www/git-repos/cs": "/Users/evan.simmons/repos/cs"}
+let g:vdebug_options['server'] = ""
 
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#tab_min_count = 2
-  let g:airline#extensions#tabline#excludes = ['-MiniBufExplorer-']
+" =====================
+" TCOMMENT BLOCK
+" =====================
+nmap <leader>/ :TComment<cr>
+nmap <D-/> :TComment<cr>
+imap <D-/> <esc>:TComment<cr>
+vmap <D-/> :TComment<cr> gv
+vmap <leader>/ :TComment<cr>
 
-  let g:airline#extensions#tabline#show_buffers = 0
-  let g:airline#extensions#tabline#buffer_nr_show = 1
-  let g:airline#extensions#tabline#fnamecollapse = 1
+" =====================
+" LATEX BLOCK
+" =====================
+let g:LatexBox_viewer="open -a skim"
+let g:LatexBox_latexmk_preview_continuously=1
+let g:LatexBox_quickfix=1
+let g:LatexBox_show_warnings=0
+let g:LatexBox_latexmk_async=1
 
-  set laststatus=2
+nmap <leader>ll :Latexmk<cr>
+nmap <leader>lv :LatexView<cr>
+nmap <leader>lc :LatexmkClean<cr>
+nmap <leader>le :LatexErrors<cr>
+nmap <leader>ls :LatexmkStop<cr>
 
-  " Code
-  let g:vdebug_options = {}
-  let g:vdebug_options["port"] = 9000
-  let g:vdebug_options['path_maps'] = {"/var/www/git-repos/cs": "/Users/evan.simmons/repos/cs"}
-  let g:vdebug_options['server'] = ""
+" =====================
+" GUNDO BLOCK
+" =====================
+nmap <leader>gu :GundoToggle<cr>
+set undofile                " Save undo's after file closes
+set undodir=$HOME/.nvim/undo " where to save undo histories
+set undolevels=1000         " How many undos
+set undoreload=10000        " number of lines to save for undo
 
-  let g:ag_format="%f:%l:%m"
+" =====================
+" MISC BLOCK
+" =====================
+let g:ag_format="%f:%l:%m"
 
-  " JS
-  let g:javascript_conceal = 1
+nmap <leader>R :RainbowParenthesesToggle<cr>
 
-  " Comment
-  nmap <leader>/ :TComment<cr>
-  nmap <D-/> :TComment<cr>
-  imap <D-/> <esc>:TComment<cr>
-  vmap <D-/> :TComment<cr> gv
-  vmap <leader>/ :TComment<cr>
-
-  "Latex
-  let g:LatexBox_viewer="open -a skim"
-  let g:LatexBox_latexmk_preview_continuously=1
-  let g:LatexBox_quickfix=1
-  let g:LatexBox_show_warnings=0
-  let g:LatexBox_latexmk_async=1
-
-  nmap <leader>ll :Latexmk<cr>
-  nmap <leader>lv :LatexView<cr>
-  nmap <leader>lc :LatexmkClean<cr>
-  nmap <leader>le :LatexErrors<cr>
-  nmap <leader>ls :LatexmkStop<cr>
-
-  " Gundo
-  nmap <leader>gu :GundoToggle<cr>
-  set undofile                " Save undo's after file closes
-  set undodir=$HOME/.nvim/undo " where to save undo histories
-  set undolevels=1000         " How many undos
-  set undoreload=10000        " number of lines to save for undo
-
-  " Rainbow
-  nmap <leader>R :RainbowParenthesesToggle<cr>
-
+" =====================
+" TODO BLOCK
+" =====================
 " Editing Config
 set autoindent
 set smartindent
-set tabstop=4 softtabstop=2 shiftwidth=2 expandtab
-set formatprg=par
+set tabstop=3 softtabstop=4 shiftwidth=4 expandtab
+set formatprg=par\ -w120
 " Reselect pasted text
 nnoremap gp `[v`]
 
@@ -265,14 +284,6 @@ nnoremap gp `[v`]
 
   vmap <M-Tab> >gv
   vmap <M-S-Tab> <gv
-
-
-" Syntax
-autocmd BufRead,BufNewFile  *.lessimport set filetype=less
-" autocmd BufRead,BufNewFile  *.md set filetype=pandoc.html
-autocmd BufRead,BufNewFile  *.js set filetype=javascript
-" autocmd BufWritePost more.md !pandoc --mathml -t html -Ss -o "more".html --css "more.css" "more.md" 
-
 
 " Digraphs
 digraph cm 8984 "⌘
