@@ -1,0 +1,38 @@
+# User specific aliases and functions
+alias vs='vagrant ssh -c "tmux a"'
+
+# Codebase
+alias fileglobals='eslint --reset --no-eslintrc -c ~/findundef.eslint.json --ignore-path ~/findundef.eslintignore'
+alias st='sourceTools'
+
+# Deprecated
+fileexports() {
+  echo 'CK.NAME = module.exports = {';
+  echo '  variables: {';
+  cat $1 |
+  grep -iE '^\s*var g_.*\s*(=|;)' |
+  cut -d ' ' -f 2 |
+  cut -d '(' -f1 |
+  sed 's/.*/    &: &,/';
+  echo '  },';
+  cat $1 |
+  grep -iE '^\s*function\s*.*\(' |
+  cut -d ' ' -f 2 |
+  cut -d '(' -f1 |
+  sed 's/.*/  &: &,/';
+  echo '}';
+}
+
+fileinclude() {
+  object=$(cat $1 |
+  grep -ioE '^\s*(CK\..*?)\s*=\s*module\.exports' |
+  perl -pe 's|^\s*(.*?)\s*=.*|\1;|');
+
+  name=$(echo -n $1 | sed 's/^.*docroot\/res\/js\/\(.*\).js$/\1/');
+
+  echo -n "var NAME = require('";
+  echo -n $name;
+  echo -n "') || ";
+  echo $object;
+}
+
