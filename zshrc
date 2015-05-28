@@ -28,11 +28,15 @@ __git_files () {
     _wanted files expl 'local files' _files
 }
 
-# Sources
-source ~/dotfiles/ck_helpers
-source ~/.fzf.zsh
+title() {
+    echo -ne "\e]1;$1\a"
+}
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
+
+# Sources
+source ~/dotfiles/ck_helpers
+source ~/.fzf.zsh
