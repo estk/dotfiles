@@ -82,7 +82,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
   Plug 'vim-pandoc/vim-pandoc'
 
   " Webdev
-  Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+  Plug 'mattn/emmet-vim'
   Plug 'groenewege/vim-less'
   Plug 'vim-stylus'
 
@@ -119,7 +119,7 @@ endif
 let mapleader = ","
 set clipboard=unnamed
 
-nmap <leader>d :b#<bar>bd#<CR>
+nmap <leader>db :b#<bar>bd#<CR>
 nmap <leader>cn :cnext<cr>
 nmap <leader>cp :cprev<cr>
 
@@ -163,8 +163,6 @@ autocmd BufRead,BufNewFile  *.js set filetype=javascript
 " =====================
 let NERDTreeHijackNetrw=1
 
-nmap <D-E> :NERDTreeToggle<cr>
-imap <D-E> <esc>:NERDTreeToggle<cr>
 nmap <leader>E :NERDTreeToggle<cr>
 
 " =====================
@@ -196,10 +194,6 @@ let g:vdebug_options['server'] = ""
 " TCOMMENT BLOCK
 " =====================
 nmap <leader>/ :TComment<cr>
-nmap <D-/> :TComment<cr>
-imap <D-/> <esc>:TComment<cr>
-vmap <D-/> :TComment<cr> gv
-vmap <leader>/ :TComment<cr>
 
 " =====================
 " LATEX BLOCK
@@ -293,7 +287,10 @@ digraph bs 9003 "⌫
 digraph al 8997 "⌥
 digraph dl 8998 "⌦
 
-
 " ESFormatter
 vnoremap <silent> <leader>es :! esformatter<CR>
 nnoremap <silent> <leader>es :%!esformatter<CR>
+
+" Dash.app
+nmap <silent> <leader>ds <Plug>DashSearch
+nmap <silent> <leader>dgs <Plug>DashSearch
