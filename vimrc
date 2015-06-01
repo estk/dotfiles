@@ -9,7 +9,7 @@ let s:ag     = executable('ag')
 " VIM-PLUG BLOCK
 " ============================================================================
 
-silent! if plug#begin('~/.nvim/plugged')
+silent! if plug#begin('~/.vim/plugged')
 
 " Vim
 Plug 'junegunn/vim-easy-align',       { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
@@ -135,7 +135,17 @@ colorscheme solarized
 " =====================
 if !s:nvim
   set nocompatible
+else
+  :tnoremap <A-h> <C-\><C-n><C-w>h
+  :tnoremap <A-j> <C-\><C-n><C-w>j
+  :tnoremap <A-k> <C-\><C-n><C-w>k
+  :tnoremap <A-l> <C-\><C-n><C-w>l
+  :nnoremap <A-h> <C-w>h
+  :nnoremap <A-j> <C-w>j
+  :nnoremap <A-k> <C-w>k
+  :nnoremap <A-l> <C-w>l
 endif
+
 " =====================
 " CURSOR BLOCK
 " =====================
@@ -194,6 +204,7 @@ let g:vdebug_options['server'] = ""
 " TCOMMENT BLOCK
 " =====================
 nmap <leader>/ :TComment<cr>
+vnoremap <leader>/ :TComment<cr>
 
 " =====================
 " LATEX BLOCK
@@ -215,7 +226,7 @@ nmap <leader>ls :LatexmkStop<cr>
 " =====================
 nmap <leader>gu :GundoToggle<cr>
 set undofile                " Save undo's after file closes
-set undodir=$HOME/.nvim/undo " where to save undo histories
+set undodir=$HOME/.vim/undo " where to save undo histories
 set undolevels=1000         " How many undos
 set undoreload=10000        " number of lines to save for undo
 
