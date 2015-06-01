@@ -119,7 +119,14 @@ endif
 let mapleader = ","
 set clipboard=unnamed
 
+" Edit config
+nmap <leader>ec :e ~/.vimrc<CR>
+" Source Config
+nmap <leader>sc :source ~/.vimrc<CR>
+" Delete Buffer
 nmap <leader>db :b#<bar>bd#<CR>
+
+" Quickfix
 nmap <leader>cn :cnext<cr>
 nmap <leader>cp :cprev<cr>
 
