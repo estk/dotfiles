@@ -137,6 +137,8 @@ nmap <leader>lp :lprev<cr>
 set background=light
 colorscheme solarized
 
+set synmaxcol=2048
+
 " =====================
 " NEOVIM BLOCK
 " =====================
