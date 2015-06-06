@@ -43,7 +43,7 @@ install_zsh
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="agignore gitconfig vimrc vim zshrc private Xresources editorconfig"    # list of files/folders to symlink in homedir
+files="tmux.conf agignore gitconfig vimrc vim zshrc private Xresources editorconfig"    # list of files/folders to symlink in homedir
 
 ##########
 
