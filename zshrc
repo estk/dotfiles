@@ -13,6 +13,11 @@ export PATH=$PATH:$GOPATH/bin
 # Homebrew and home bin
 export PATH=$PATH:/usr/local/bin:$HOME/bin
 
+# Use ~~ as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER='~~'
+
+# Options to fzf command
+export FZF_DEFAULT_OPTS='-x'
 
 # Aliases
 
