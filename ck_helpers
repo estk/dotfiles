@@ -1,5 +1,5 @@
 # User specific aliases and functions
-alias vs='vagrant ssh -c "tmux a"'
+alias vs='vagrant ssh -c "tmux attach || tmux new"'
 
 # Codebase
 alias fileglobals='eslint --reset --no-eslintrc -c ~/findundef.eslint.json --ignore-path ~/findundef.eslintignore'
