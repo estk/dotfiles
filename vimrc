@@ -119,6 +119,8 @@ endif
 let mapleader = ","
 set clipboard=unnamed
 
+" Escape with jj
+inoremap jj <ESC>
 " Edit config
 nmap <leader>ec :e ~/.vimrc<CR>
 " Source Config
