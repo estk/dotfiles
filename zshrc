@@ -1,10 +1,12 @@
-# vim editor, emacs zle
 export EDITOR=nvim
-export KEYTIMEOUT=1
-bindkey -e
+export KEYTIMEOUT=10
 
-# Be fancy
-alias cd=pushd
+bindkey -v
+
+# Escape with jj
+bindkey -M viins ‘jj’ vi-cmd-mode
+bindkey '^[[1;9C' forward-word
+bindkey '^[[1;9D' backward-word
 
 # Go!
 export GOPATH=$HOME/go
@@ -20,6 +22,10 @@ export FZF_COMPLETION_TRIGGER='~~'
 export FZF_DEFAULT_OPTS='-x'
 
 # Aliases
+
+alias cd=pushd
+alias vi=nvim
+alias vim=nvim
 
 # Add the file to the current vim server.
 vis() {
