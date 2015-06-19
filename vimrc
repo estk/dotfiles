@@ -69,7 +69,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 
 " Syntax
-" Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 Plug 'marijnh/tern_for_vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'godlygeek/tabular'
@@ -308,6 +308,17 @@ digraph rt 8617 "↩
 digraph bs 9003 "⌫
 digraph al 8997 "⌥
 digraph dl 8998 "⌦
+
+" Syntastic
+let g:syntastic_javascript_checkers = ['eslint']
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+nmap <leader>sr :SyntasticReset<cr>
+
 
 " ESFormatter
 vnoremap <silent> <leader>es :! esformatter<CR>
