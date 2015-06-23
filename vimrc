@@ -121,10 +121,13 @@ set clipboard=unnamed
 
 " Escape with jj
 inoremap jj <ESC>
+
 " Edit config
 nmap <leader>ec :e ~/.vimrc<CR>
+
 " Source Config
 nmap <leader>sc :source ~/.vimrc<CR>
+
 " Delete Buffer
 nmap <leader>db :b#<bar>bd#<CR>
 
@@ -140,6 +143,43 @@ set background=light
 colorscheme solarized
 
 set synmaxcol=2048
+
+" Editing Config
+set autoindent
+set smartindent
+set tabstop=3 softtabstop=4 shiftwidth=4 expandtab
+set formatprg=par\ -w120
+
+" Reselect pasted text
+nnoremap gp `[v`]
+
+  " Completion
+  set wildmenu
+  set wildmode=longest:full,full
+
+  " Search
+  set ignorecase    " ignore case when searching
+  set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
+  set hlsearch      " highlight search terms
+  set incsearch
+
+  nmap <leader><space> :noh<cr>
+
+  nnoremap / /\v
+  vnoremap / /\v
+
+  nmap <leader>f :Ag 
+  nmap <leader>t :FZF<cr>
+
+  " View
+  set list
+  set conceallevel=1
+  set concealcursor="nc"
+  set number
+  set hidden
+  set listchars=tab:▸\ ,eol:¬
+
+  nmap <leader>l :set list!<CR> " Shortcut to rapidly toggle `set list`
 
 " =====================
 " NEOVIM BLOCK
@@ -182,8 +222,8 @@ autocmd BufRead,BufNewFile  *.js set filetype=javascript
 " =====================
 " NERDTREE BLOCK
 " =====================
-let NERDTreeHijackNetrw=1
 
+let NERDTreeHijackNetrw=1
 nmap <leader>E :NERDTreeToggle<cr>
 
 " =====================
@@ -206,6 +246,7 @@ set laststatus=2
 " =====================
 " VDEBUG BLOCK
 " =====================
+
 let g:vdebug_options = {}
 let g:vdebug_options["port"] = 9000
 let g:vdebug_options['path_maps'] = {"/var/www/git-repos/cs": "/Users/evan.simmons/repos/cs"}
@@ -214,12 +255,14 @@ let g:vdebug_options['server'] = ""
 " =====================
 " TCOMMENT BLOCK
 " =====================
+
 nmap <leader>/ :TComment<cr>
 vnoremap <leader>/ :TComment<cr>
 
 " =====================
 " LATEX BLOCK
 " =====================
+
 let g:LatexBox_viewer="open -a skim"
 let g:LatexBox_latexmk_preview_continuously=1
 let g:LatexBox_quickfix=1
@@ -249,67 +292,8 @@ let g:ag_format="%f:%l:%m"
 nmap <leader>R :RainbowParenthesesToggle<cr>
 
 " =====================
-" TODO BLOCK
+" SYNTASTIC BLOCK
 " =====================
-" Editing Config
-set autoindent
-set smartindent
-set tabstop=3 softtabstop=4 shiftwidth=4 expandtab
-set formatprg=par\ -w120
-" Reselect pasted text
-nnoremap gp `[v`]
-
-  " Completion
-  set wildmenu
-  set wildmode=longest:full,full
-
-  " Search
-  set ignorecase    " ignore case when searching
-  set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
-  set hlsearch      " highlight search terms
-  set incsearch
-
-  nmap <leader><space> :noh<cr>
-
-  nnoremap / /\v
-  vnoremap / /\v
-
-  nmap <D-F> :Ag 
-  nmap <leader>f :Ag 
-  nmap <leader>t :FZF<cr>
-
-  " View
-  set list
-  set conceallevel=1
-  set concealcursor="nc"
-  set number
-  set hidden
-  set listchars=tab:▸\ ,eol:¬
-
-  nmap <leader>l :set list!<CR> " Shortcut to rapidly toggle `set list`
-
-  nmap <leader>s :SyntasticReset<cr> :set list!<cr> "quiet
-  
-
-  " Indent
-  imap <M-Tab> <esc>>>i
-  imap <M-S-Tab> <esc><<i
-
-  nmap <M-Tab> >>
-  nmap <M-S-Tab> <<
-
-  vmap <M-Tab> >gv
-  vmap <M-S-Tab> <gv
-
-" Digraphs
-digraph cm 8984 "⌘
-digraph sh 8679 "⇧
-digraph rt 8617 "↩
-digraph bs 9003 "⌫
-digraph al 8997 "⌥
-digraph dl 8998 "⌦
-
-" Syntastic
 let g:syntastic_javascript_checkers = ['eslint']
 
 let g:syntastic_always_populate_loc_list = 1
@@ -317,13 +301,48 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-nmap <leader>sr :SyntasticReset<cr>
+" nmap <leader>sr :SyntasticReset<cr>
+nmap <leader>s :SyntasticReset<cr> :set list!<cr> "quiet
 
+" =====================
+" DASH BLOCK
+" =====================
 
-" ESFormatter
+nmap <silent> <leader>ds <Plug>DashSearch
+nmap <silent> <leader>dgs <Plug>DashSearch
+
+" =====================
+" ESFORMATTER BLOCK
+" =====================
+
 vnoremap <silent> <leader>es :! esformatter<CR>
 nnoremap <silent> <leader>es :%!esformatter<CR>
 
-" Dash.app
-nmap <silent> <leader>ds <Plug>DashSearch
-nmap <silent> <leader>dgs <Plug>DashSearch
+" =====================
+" COLEMAK BLOCK
+" =====================
+
+noremap n j|noremap <C-w>n <C-w>j|noremap <C-w><C-n> <C-w>j
+noremap e k|noremap <C-w>e <C-w>k|noremap <C-w><C-e> <C-w>k
+noremap s h
+noremap t l
+
+noremap f e
+noremap k n
+noremap K N 
+noremap U <C-r>
+
+" =====================
+" DIGRAPHS BLOCK
+" =====================
+
+digraph cm 8984 "⌘
+digraph sh 8679 "⇧
+digraph rt 8617 "↩
+digraph bs 9003 "⌫
+digraph al 8997 "⌥
+digraph dl 8998 "⌦
+
+" =====================
+" TODO BLOCK
+" =====================
