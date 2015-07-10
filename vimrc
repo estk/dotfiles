@@ -93,6 +93,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
     Plug 'mmalecki/vim-node.js'
     Plug 'nono/vim-handlebars'
     Plug 'moll/vim-node'
+    Plug 'heavenshell/vim-jsdoc'
 
   " Haskell
   Plug 'wlangstroth/vim-haskell'
@@ -298,11 +299,10 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" nmap <leader>sr :SyntasticReset<cr>
-nmap <leader>s :SyntasticReset<cr> :set list!<cr> "quiet
+nmap <leader>sr :SyntasticReset<cr>
+" nmap <leader>sr :SyntasticReset<cr> :set list!<cr> "quiet
 
 " =====================
 " DASH BLOCK
@@ -322,15 +322,15 @@ nnoremap <silent> <leader>es :%!esformatter<CR>
 " COLEMAK BLOCK
 " =====================
 
-noremap n j|noremap <C-w>n <C-w>j|noremap <C-w><C-n> <C-w>j
-noremap e k|noremap <C-w>e <C-w>k|noremap <C-w><C-e> <C-w>k
-noremap s h
-noremap t l
-
-noremap f e
-noremap k n
-noremap K N 
-noremap U <C-r>
+" noremap n j|noremap <C-w>n <C-w>j|noremap <C-w><C-n> <C-w>j
+" noremap e k|noremap <C-w>e <C-w>k|noremap <C-w><C-e> <C-w>k
+" noremap s h
+" noremap t l
+"
+" noremap f e
+" noremap k n
+" noremap K N
+" noremap U <C-r>
 
 " =====================
 " DIGRAPHS BLOCK
