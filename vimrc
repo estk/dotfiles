@@ -69,7 +69,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 
 " Syntax
-Plug 'scrooloose/syntastic'
 Plug 'marijnh/tern_for_vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'godlygeek/tabular'
@@ -132,6 +131,10 @@ nmap <leader>sc :source ~/.vimrc<CR>
 " Delete Buffer
 nmap <leader>db :b#<bar>bd#<CR>
 
+" Next buf
+nmap <leader>bn :bn<cr>
+nmap <leader>bp :bp<cr>
+
 " Quickfix
 nmap <leader>cn :cnext<cr>
 nmap <leader>cp :cprev<cr>
@@ -150,6 +153,10 @@ set autoindent
 set smartindent
 set tabstop=3 softtabstop=4 shiftwidth=4 expandtab
 set formatprg=par\ -w120
+
+" Quick toggle
+nmap <leader>i2 :set softtabstop=2 shiftwidth=2<cr>
+nmap <leader>i4 :set softtabstop=4 shiftwidth=4<cr>
 
 " Reselect pasted text
 nnoremap gp `[v`]
@@ -219,7 +226,18 @@ autocmd BufRead,BufNewFile  *.js set filetype=javascript
 " ============================================================================
 " PLUGIN CONFIG BLOCK
 " ============================================================================
-"
+" =====================
+" NEOMAKE BLOCK
+" =====================
+nmap <leader>lo :lopen<cr>
+nmap <leader>m :Neomake<cr>
+let g:neomake_javascript_eslint_maker = {
+    \ 'args': ['--no-eslintrc', '-c', '~/repos/ecmas-styleguide/eslintrc-es6x', '-f', 'compact'],
+    \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+    \ '%W%f: line %l\, col %c\, Warning - %m'
+\ }
+let g:neomake_javascript_enabled_makers = ['eslint']
+
 " =====================
 " NERDTREE BLOCK
 " =====================
@@ -232,7 +250,7 @@ nmap <leader>E :NERDTreeToggle<cr>
 " =====================
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
+" let g:airline#extensions#syntastic#enabled = 1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_min_count = 2
@@ -295,13 +313,14 @@ nmap <leader>R :RainbowParenthesesToggle<cr>
 " =====================
 " SYNTASTIC BLOCK
 " =====================
-let g:syntastic_javascript_checkers = ['eslint']
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
-
-nmap <leader>sr :SyntasticReset<cr>
+" let g:syntastic_javascript_checkers = ['eslint']
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_wq = 1
+"
+" nmap <leader>sr :SyntasticReset<cr>
+" nmap <leader>sc :SyntasticCheck<cr>
 " nmap <leader>sr :SyntasticReset<cr> :set list!<cr> "quiet
 
 " =====================
@@ -346,3 +365,13 @@ digraph dl 8998 "⌦
 " =====================
 " TODO BLOCK
 " =====================
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <silent><leader>n :set rnu! rnu? <cr>
+set relativenumber
+nnoremap <leader>w :w<cr>
