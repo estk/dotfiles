@@ -231,12 +231,12 @@ autocmd BufRead,BufNewFile  *.js set filetype=javascript
 " =====================
 nmap <leader>lo :lopen<cr>
 nmap <leader>m :Neomake<cr>
-let g:neomake_javascript_eslint_maker = {
-    \ 'args': ['--no-eslintrc', '-c', '~/repos/ecmas-styleguide/eslintrc-es6x', '-f', 'compact'],
-    \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-    \ '%W%f: line %l\, col %c\, Warning - %m'
-\ }
-let g:neomake_javascript_enabled_makers = ['eslint']
+" let g:neomake_javascript_eslint_maker = {
+"     \ 'args': ['--no-eslintrc', '-c', '~/repos/ecmas-styleguide/eslintrc-es6x', '-f', 'compact'],
+"     \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+"     \ '%W%f: line %l\, col %c\, Warning - %m'
+" \ }
+" let g:neomake_javascript_enabled_makers = ['eslint']
 
 " =====================
 " NERDTREE BLOCK

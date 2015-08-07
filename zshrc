@@ -30,6 +30,9 @@ export FZF_DEFAULT_OPTS='-x'
 vis() {
   nvim --servername ${2:=VIM} --remote $1
 }
+rag() {
+  ag --print0 -l $1 | xargs -0 perl -pi -e "s/$1/$2/g"
+}
 
 alias notify='terminal-notifier -sound default -message'
 
@@ -68,7 +71,6 @@ alias updates="cd ~/.fzf && git pull && \
     git submodule update --init --recursive && \
     cd ~/.zprezto && git pull && \
     git submodule update --init --recursive && cd ~"
-
 # Make git autocomlete un-useless.
 __git_files () {
     _wanted files expl 'local files' _files
