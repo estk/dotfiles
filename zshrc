@@ -24,17 +24,25 @@ export FZF_COMPLETION_TRIGGER='~~'
 
 # Options to fzf command
 export FZF_DEFAULT_OPTS='-x'
+#
+# fzf command
+export FZF_DEFAULT_COMMAND='git ls-tree -r --name-only HEAD || ag -l -g ""'
+
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Aliases
 # Add the file to the current vim server.
-vis() {
+function vis {
   nvim --servername ${2:=VIM} --remote $1
 }
-rag() {
+# Replace with ag
+function rag {
   ag --print0 -l $1 | xargs -0 perl -pi -e "s/$1/$2/g"
 }
 
 alias notify='terminal-notifier -sound default -message'
+
+alias cs="cd ~/repos/cs"
 
 # Miscellaneous settings.
 setopt appendhistory                    # Append history instead of replacing.
@@ -51,6 +59,7 @@ setopt notify                           # Report job status.
 # Aliases
 # =============================================================================
 alias cd=pushd
+alias v=nvim
 alias vi=nvim
 alias vim=nvim
 
@@ -88,3 +97,4 @@ fi
 # Sources
 source ~/dotfiles/ck_helpers
 source ~/.fzf.zsh
+alias repos='cd ~/repos'

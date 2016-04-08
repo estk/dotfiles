@@ -56,7 +56,6 @@ Plug 'wincent/Command-T'
 Plug 'tpope/vim-commentary',        { 'on': '<Plug>Commentary' }
 Plug 'mbbill/undotree',             { 'on': 'UndotreeToggle'   }
 Plug 'fholgado/minibufexpl.vim'
-Plug 'wannesm/rmvim.vim'
 Plug 'Townk/vim-autoclose'
 Plug 'LargeFile'
 Plug 'BufOnly.vim'

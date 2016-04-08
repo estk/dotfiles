@@ -1,8 +1,6 @@
 [user]
-    name = Evan Simmons
-    email = evan.simmons@creditkarma.com
-[credential]
-    helper = osxkeychain
+	name = Evan Simmons
+	email = evan.simmons@creditkarma.com
 [core]
     editor = nvim
     excludesfile = ~/.gitignore_global
@@ -117,6 +115,7 @@
     lt = describe --tags --abbrev=0
 
     #merges
+    fm = "!f() { git fetch && git merge origin/stable; }; f"
     ours = "!f() { git co --ours $@ && git add $@; }; f"
     theirs = "!f() { git co --theirs $@ && git add $@; }; f"
 
@@ -146,8 +145,3 @@
     prompt = false
 [merge]
     tool = Kaleidoscope
-
-[github]
-    user = estk
-[ghi]
-    token = c185363655051d9cffbab24788d199e799b6b03f
