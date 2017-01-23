@@ -9,7 +9,7 @@ shopt -s extglob
 function install_zsh {
 # Test to see if zshell is installed.  If it is:
 if [ -f /bin/zsh -o -f /usr/bin/zsh -o -f /usr/local/bin/zsh ]; then
-    # Clone my oh-my-zsh repository from GitHub only if it isn't already present
+    # Clone my zprezto repository from GitHub only if it isn't already present
     if [[ ! -d $HOME/.zprezto ]]; then
         git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
         for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/*; do
@@ -22,6 +22,8 @@ if [ -f /bin/zsh -o -f /usr/bin/zsh -o -f /usr/local/bin/zsh ]; then
     if [[ ! $(echo $SHELL) == $(which zsh) ]]; then
         chsh -s $(which zsh)
     fi
+
+    ln -s ./zpreztorc $HOME/.zpreztorc
 else
     # If zsh isn't installed, get the platform of the current machine
     platform=$(uname);
