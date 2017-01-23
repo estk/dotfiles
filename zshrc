@@ -13,12 +13,17 @@ export BROWSER="firefox"                # Set Firefox as the default browser.
 export EDITOR="nvim"                    # Set Neovim as the default editor.
 
 # Go!
-export GOPATH=$HOME/go
+export GOPATH=$HOME/golang
 export PATH=$PATH:$GOPATH/bin
 
 # Homebrew and home bin
 export PATH=$PATH:/usr/local/bin:$HOME/bin
 
+#
+export FZF_DEFAULT_COMMAND='ag --ignore .git -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# To apply the command to CTRL-T as well
 # Use ~~ as the trigger sequence instead of the default **
 export FZF_COMPLETION_TRIGGER='~~'
 
@@ -26,9 +31,8 @@ export FZF_COMPLETION_TRIGGER='~~'
 export FZF_DEFAULT_OPTS='-x'
 #
 # fzf command
-export FZF_DEFAULT_COMMAND='git ls-tree -r --name-only HEAD || ag -l -g ""'
+# export FZF_DEFAULT_COMMAND='git ls-tree -r --name-only HEAD || ag -l -g ""'
 
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Aliases
 # Add the file to the current vim server.
@@ -38,6 +42,9 @@ function vis {
 # Replace with ag
 function rag {
   ag --print0 -l $1 | xargs -0 perl -pi -e "s/$1/$2/g"
+}
+function listening {
+    lsof -i -n -P | grep LISTEN
 }
 
 alias notify='terminal-notifier -sound default -message'
@@ -62,6 +69,8 @@ alias cd=pushd
 alias v=nvim
 alias vi=nvim
 alias vim=nvim
+
+alias m='make -j'
 
 alias cp="nocorrect cp -v"              # Verbose copying with no auto-correct.
 alias df="df -h"                        # Enable human-readable output.
@@ -98,3 +107,4 @@ fi
 source ~/dotfiles/ck_helpers
 source ~/.fzf.zsh
 alias repos='cd ~/repos'
+alias cinf='cd $GOPATH/src/stash.corp.creditkarma.com/cinf'

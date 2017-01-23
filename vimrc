@@ -12,6 +12,7 @@ let s:ag     = executable('ag')
 silent! if plug#begin('~/.vim/plugged')
 
 " Vim
+Plug 'mhinz/vim-hugefile'
 Plug 'junegunn/vim-easy-align',       { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'tpope/vim-sensible'
@@ -57,7 +58,7 @@ Plug 'tpope/vim-commentary',        { 'on': '<Plug>Commentary' }
 Plug 'mbbill/undotree',             { 'on': 'UndotreeToggle'   }
 Plug 'fholgado/minibufexpl.vim'
 Plug 'Townk/vim-autoclose'
-Plug 'LargeFile'
+" Plug 'LargeFile'
 Plug 'BufOnly.vim'
 
 
@@ -68,6 +69,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 
 " Syntax
+Plug 'scrooloose/syntastic'
 Plug 'marijnh/tern_for_vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'godlygeek/tabular'
@@ -100,7 +102,10 @@ Plug 'junegunn/rainbow_parentheses.vim'
   Plug 'Arduino-syntax-file'
 
   " Scala
-  Plug 'rosstimson/scala-vim-support'
+  " Plug 'rosstimson/scala-vim-support'
+  Plug 'derekwyatt/vim-scala'
+  Plug 'ktvoelker/sbt-vim'
+  Plug 'ensime/ensime-vim'
   
 if s:darwin
   Plug 'Keithbsmiley/investigate.vim'

@@ -1,6 +1,7 @@
 [user]
 	name = Evan Simmons
-	email = evan.simmons@creditkarma.com
+	email = esims89@gmail.com
+	# email = evan.simmons@creditkarma.com
 [core]
     editor = nvim
     excludesfile = ~/.gitignore_global
