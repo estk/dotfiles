@@ -9,7 +9,7 @@ let s:ag     = executable('ag')
 " VIM-PLUG BLOCK
 " ============================================================================
 
-silent! if plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 " Vim
 Plug 'mhinz/vim-hugefile'
@@ -58,11 +58,11 @@ Plug 'tpope/vim-commentary',        { 'on': '<Plug>Commentary' }
 Plug 'mbbill/undotree',             { 'on': 'UndotreeToggle'   }
 Plug 'fholgado/minibufexpl.vim'
 Plug 'Townk/vim-autoclose'
-" Plug 'LargeFile'
 Plug 'BufOnly.vim'
 
 
 " Themes
+Plug 'rakr/vim-one'
 Plug 'altercation/vim-colors-solarized'
 Plug 'telamon/vim-color-github'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -104,8 +104,6 @@ Plug 'junegunn/rainbow_parentheses.vim'
   " Scala
   " Plug 'rosstimson/scala-vim-support'
   Plug 'derekwyatt/vim-scala'
-  Plug 'ktvoelker/sbt-vim'
-  Plug 'ensime/ensime-vim'
   
 if s:darwin
   Plug 'Keithbsmiley/investigate.vim'
@@ -114,7 +112,6 @@ if s:darwin
 endif
 
 call plug#end()
-endif
 
 " ============================================================================
 " GLOBAL CONFIG BLOCK
@@ -147,8 +144,9 @@ nmap <leader>ln :lnext<cr>
 nmap <leader>lp :lprev<cr>
 
 " Looks
-set background=light
-colorscheme solarized
+let g:one_allow_italics = 1
+set background=dark
+colorscheme one
 
 set synmaxcol=2048
 
@@ -252,6 +250,7 @@ nmap <leader>E :NERDTreeToggle<cr>
 " =====================
 " AIRLINE BLOCK
 " =====================
+let g:airline_theme='one'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 1
 " let g:airline#extensions#syntastic#enabled = 1
